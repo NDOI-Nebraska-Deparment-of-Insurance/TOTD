@@ -1,0 +1,111 @@
+<title>TOTD Archive — NDOI Teams Tips</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+<style>
+  :root {
+    --bg:         #F3F2F1;
+    --surface:    #FFFFFF;
+    --border:     #E1DFDD;
+    --text:       #201F1E;
+    --text-muted: #605E5C;
+    --teams:      #6264A7;
+    --radius:     10px;
+    --shadow:     0 2px 8px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1B1B3A; --surface: #252552; --border: #3A3A6A;
+      --text: #F3F2F1; --text-muted: #B0AECB;
+      --shadow: 0 2px 12px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1B1B3A; --surface: #252552; --border: #3A3A6A;
+    --text: #F3F2F1; --text-muted: #B0AECB;
+    --shadow: 0 2px 12px rgba(0,0,0,0.35);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 32px 16px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; }
+
+  .header {
+    background: var(--teams);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 32px 36px 28px;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: rgba(255,255,255,0.65);
+    text-decoration: none; margin-bottom: 16px;
+  }
+  .back-link:hover { color: rgba(255,255,255,0.9); }
+  .header h1 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .header p { font-size: 14px; color: rgba(255,255,255,0.65); }
+
+  .list {
+    background: var(--surface);
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .list-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none; color: inherit;
+    transition: background 0.15s;
+  }
+  .list-item:last-child { border-bottom: none; }
+  .list-item:hover { background: #FAF9F8; }
+  .item-rail {
+    width: 4px; min-height: 40px; border-radius: 2px; flex-shrink: 0;
+    align-self: stretch;
+  }
+  .item-body { flex: 1; }
+  .item-theme {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px;
+  }
+  .item-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .item-date { font-size: 12px; color: var(--text-muted); }
+  .item-arrow { font-size: 16px; color: var(--text-muted); flex-shrink: 0; }
+
+  .footer { margin-top: 20px; font-size: 12px; color: var(--text-muted); }
+  .footer a { color: var(--teams); text-decoration: none; font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <header class="header">
+    <a class="back-link" href="../">← Current tip</a>
+    <h1>Archive</h1>
+    <p>All past NDOI Microsoft Teams Tips of the Day</p>
+  </header>
+
+  <div class="list" id="archive-list">
+
+    <a class="list-item" href="2026-09-02.html">
+      <div class="item-rail" style="background:#7B3FE4;"></div>
+      <div class="item-body">
+        <div class="item-theme">AI &amp; Copilot</div>
+        <div class="item-title">Copilot in Teams is actually kind of magic</div>
+        <div class="item-date">September 2, 2026</div>
+      </div>
+      <span class="item-arrow">›</span>
+    </a>
+
+  </div>
+
+  <p class="footer">New tips every week. <a href="../">See this week's tip →</a></p>
+</div>

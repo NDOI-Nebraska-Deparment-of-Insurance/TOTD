@@ -1,0 +1,397 @@
+<title>Teams Tip of the Day</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+<style>
+  /* ── Tokens ── */
+  :root {
+    --bg:          #F3F2F1;
+    --surface:     #FFFFFF;
+    --surface-2:   #FAF9F8;
+    --border:      #E1DFDD;
+    --text:        #201F1E;
+    --text-muted:  #605E5C;
+    --text-inv:    #FFFFFF;
+
+    --teams:       #6264A7;
+    --teams-dark:  #4B4B8B;
+    --teams-light: #EEEEF6;
+
+    --copilot:     #7B3FE4;
+    --recap:       #5B5FC7;
+    --viva:        #008272;
+    --sharepoint:  #038387;
+    --outlook:     #0078D4;
+    --studio:      #B146C2;
+
+    --radius:      10px;
+    --shadow:      0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:          #1B1B3A;
+      --surface:     #252552;
+      --surface-2:   #1F1F45;
+      --border:      #3A3A6A;
+      --text:        #F3F2F1;
+      --text-muted:  #B0AECB;
+      --text-inv:    #FFFFFF;
+      --teams-light: #2D2D5A;
+      --shadow:      0 2px 12px rgba(0,0,0,0.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg:          #1B1B3A;
+    --surface:     #252552;
+    --surface-2:   #1F1F45;
+    --border:      #3A3A6A;
+    --text:        #F3F2F1;
+    --text-muted:  #B0AECB;
+    --text-inv:    #FFFFFF;
+    --teams-light: #2D2D5A;
+    --shadow:      0 2px 12px rgba(0,0,0,0.35);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 32px 16px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Wrapper ── */
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--teams);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 36px 36px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Subtle sparkle decoration for Copilot theme */
+  .header::after {
+    content: '✦';
+    position: absolute;
+    bottom: 20px;
+    right: 36px;
+    font-size: 52px;
+    color: rgba(255,255,255,0.06);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .header-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .teams-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .teams-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
+
+  .header-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .header h1 {
+    font-size: clamp(26px, 5vw, 34px);
+    font-weight: 800;
+    color: var(--text-inv);
+    line-height: 1.15;
+    text-wrap: balance;
+    margin-bottom: 10px;
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.72);
+    font-weight: 400;
+  }
+
+  .header-date {
+    position: absolute;
+    top: 36px;
+    right: 36px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Theme badge ── */
+  .theme-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ── Tips list ── */
+  .tips {
+    background: var(--surface);
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 8px 0 4px;
+    box-shadow: var(--shadow);
+  }
+
+  .tip {
+    display: flex;
+    gap: 20px;
+    padding: 22px 32px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .tip:last-child { border-bottom: none; }
+
+  .tip:hover { background: var(--surface-2); }
+
+  .tip-rail {
+    width: 4px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    align-self: stretch;
+    min-height: 20px;
+  }
+
+  .tip-body { flex: 1; min-width: 0; }
+
+  .tip-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    opacity: 0.72;
+  }
+
+  .tip-chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .tip h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+
+  .tip p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .footer-brand strong {
+    color: var(--teams);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--teams);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.45; transform: scale(0.85); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .badge-dot { animation: none; }
+  }
+
+  @media (max-width: 480px) {
+    .header { padding: 28px 24px 24px; }
+    .header-date { position: static; margin-top: 12px; display: block; }
+    .tip { padding: 18px 20px; gap: 14px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="header">
+    <div class="header-eyebrow">
+      <div class="teams-icon">
+        <!-- M365 grid icon -->
+        <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="7" height="7" rx="1.5"/>
+          <rect x="11" y="2" width="7" height="7" rx="1.5"/>
+          <rect x="2" y="11" width="7" height="7" rx="1.5"/>
+          <rect x="11" y="11" width="7" height="7" rx="1.5"/>
+        </svg>
+      </div>
+      <span class="header-label">Microsoft 365</span>
+    </div>
+    <span class="header-date">September 2, 2026</span>
+    <div class="theme-badge">✦ This week: AI &amp; Copilot</div>
+    <h1>Tip of the Day</h1>
+    <p class="header-sub">PSA: Microsoft 365 is way more powerful than you're using it 🚀</p>
+  </header>
+
+  <div class="tips">
+
+    <div class="tip">
+      <div class="tip-rail" style="background: var(--copilot);"></div>
+      <div class="tip-body">
+        <div class="tip-chip" style="color: var(--copilot);">
+          <span class="tip-chip-dot" style="background: var(--copilot);"></span>
+          Copilot · Meetings
+        </div>
+        <h2>Never miss an action item again</h2>
+        <p>Copilot recaps every meeting with a transcript, summary, and a clean list of action items — even if you joined late or "accidentally" went on mute for 20 minutes. Find it in the meeting chat after the call.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-rail" style="background: var(--recap);"></div>
+      <div class="tip-body">
+        <div class="tip-chip" style="color: var(--recap);">
+          <span class="tip-chip-dot" style="background: var(--recap);"></span>
+          Copilot · Chat &amp; Channels
+        </div>
+        <h2>TL;DR on a 300-message thread</h2>
+        <p>Open any chat or channel and ask Copilot to "summarize the last 48 hours" or "what decisions were made?" It reads the whole thread so you don't have to. No more doom-scrolling for context.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-rail" style="background: var(--outlook);"></div>
+      <div class="tip-body">
+        <div class="tip-chip" style="color: var(--outlook);">
+          <span class="tip-chip-dot" style="background: var(--outlook);"></span>
+          Copilot · Outlook
+        </div>
+        <h2>Draft email replies using your meeting notes</h2>
+        <p>Copilot in Outlook can pull context straight from your Teams meetings and chats when drafting a reply. Mention "use last week's call notes" and it fills in the relevant details — no copy-paste needed.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-rail" style="background: var(--viva);"></div>
+      <div class="tip-body">
+        <div class="tip-chip" style="color: var(--viva);">
+          <span class="tip-chip-dot" style="background: var(--viva);"></span>
+          Viva Insights
+        </div>
+        <h2>Let AI defend your focus time</h2>
+        <p>Viva Insights (via the Teams sidebar) automatically books daily focus blocks and silences notifications during them. It also shows you how much of your week is eaten by meetings — sometimes that number is a wake-up call.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-rail" style="background: var(--sharepoint);"></div>
+      <div class="tip-body">
+        <div class="tip-chip" style="color: var(--sharepoint);">
+          <span class="tip-chip-dot" style="background: var(--sharepoint);"></span>
+          Copilot · SharePoint
+        </div>
+        <h2>Find any file with a plain English question</h2>
+        <p>In the Teams search bar, Copilot can surface files, emails, and meeting recordings by meaning, not just keywords. Ask "find the Q3 budget deck Sara shared in July" and it actually works. It's your personal M365 brain.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-rail" style="background: var(--studio);"></div>
+      <div class="tip-body">
+        <div class="tip-chip" style="color: var(--studio);">
+          <span class="tip-chip-dot" style="background: var(--studio);"></span>
+          Copilot Studio
+        </div>
+        <h2>Build a custom team bot — no code required</h2>
+        <p>Copilot Studio lets you create a custom AI assistant for your team in under an hour. Connect it to your SharePoint docs, internal FAQs, or ticketing system. Drop it into a Teams channel and watch your teammates become self-sufficient.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <span class="footer-brand">Brought to you by <strong>Microsoft 365</strong></span>
+    <span class="badge"><span class="badge-dot"></span>Your AI co-pilot is waiting 🚀</span>
+  </footer>
+
+</div>
