@@ -267,6 +267,15 @@
     letter-spacing: 0.04em;
   }
 
+  /* ── App color strip ── */
+  .app-strip {
+    display: flex;
+    height: 5px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+  }
+  .app-strip span { flex: 1; }
+
   .badge-dot {
     width: 8px;
     height: 8px;
@@ -293,7 +302,19 @@
 
 <div class="wrap">
 
-  <header class="header">
+  <div class="app-strip">
+    <span style="background:#6264A7;"></span>
+    <span style="background:#0078D4;"></span>
+    <span style="background:#038387;"></span>
+    <span style="background:#19A5E4;"></span>
+    <span style="background:#31752F;"></span>
+    <span style="background:#0066DA;"></span>
+    <span style="background:#B146C2;"></span>
+    <span style="background:#D83B01;"></span>
+    <span style="background:#217346;"></span>
+  </div>
+
+  <header class="header" style="border-radius: 0;">
     <div class="header-eyebrow">
       <div class="teams-icon">
         <!-- M365 grid icon -->
